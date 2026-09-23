@@ -12,19 +12,23 @@ from backend.schemas.drug import (
     DrugRelationshipItem, DrugRelationshipsResponse
 )
 
+BASELINE_FEATURE_YEAR = 2022
+
 def get_latest_feature_record_for_drug(cms_entity_name: str) -> Tuple[pd.Series, int]:
     """
-    Retrieve latest valid feature observation for a drug entity.
+    Retrieve feature observation for a drug entity for the MedCascade production baseline feature year (2022).
     """
-    entity_df = state.ml_df[state.ml_df['cms_entity_name'] == cms_entity_name]
+    entity_df = state.ml_df[
+        (state.ml_df['cms_entity_name'] == cms_entity_name) & 
+        (state.ml_df['feature_year_t'] == BASELINE_FEATURE_YEAR)
+    ]
     if entity_df.empty:
         raise HTTPException(
             status_code=404,
-            detail=f"No ML feature observation record found for drug entity '{cms_entity_name}'."
+            detail=f"No ML feature observation record found for drug entity '{cms_entity_name}' for production baseline feature year {BASELINE_FEATURE_YEAR}."
         )
-    # Get latest row deterministically by feature_year_t
-    latest_row = entity_df.sort_values('feature_year_t', ascending=False).iloc[0]
-    return latest_row, int(latest_row['feature_year_t'])
+    feature_row = entity_df.iloc[0]
+    return feature_row, BASELINE_FEATURE_YEAR
 
 def search_drugs(
     search: Optional[str] = None,

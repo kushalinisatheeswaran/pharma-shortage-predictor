@@ -1,0 +1,219 @@
+{
+  "schema_name": "MedCascade Inference Input Schema",
+  "schema_version": "1.0.0",
+  "expected_columns": [
+    "claims",
+    "beneficiaries",
+    "spending",
+    "avg_spending_per_claim",
+    "avg_spending_per_beneficiary",
+    "manufacturer_count",
+    "claims_lag_1",
+    "claims_growth_yoy",
+    "beneficiaries_lag_1",
+    "beneficiary_growth_yoy",
+    "spending_lag_1",
+    "spending_growth_yoy",
+    "avg_spending_per_claim_growth",
+    "years_observed_before_t",
+    "claims_rolling_mean_2y",
+    "claims_rolling_std_2y",
+    "spending_rolling_mean_2y",
+    "is_first_observation_year",
+    "prior_shortage_count",
+    "ever_shortage_before_t",
+    "years_since_last_shortage",
+    "is_single_manufacturer",
+    "therapeutic_category"
+  ],
+  "feature_count": 23,
+  "numerical_feature_count": 22,
+  "categorical_feature_count": 1,
+  "fields": [
+    {
+      "name": "claims",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Total Medicare Part D prescription claims filled in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "beneficiaries",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Total unique Medicare Part D beneficiaries in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "spending",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Total gross drug spending ($) in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "avg_spending_per_claim",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Average gross spending per claim ($) in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "avg_spending_per_beneficiary",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Average gross spending per beneficiary ($) in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "manufacturer_count",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Number of active manufacturers producing/labeling drug in year t",
+      "source": "CMS Part D"
+    },
+    {
+      "name": "claims_lag_1",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Prescription claims filled in year t-1",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "claims_growth_yoy",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Year-over-year claims percentage growth ((t - t-1) / t-1)",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "beneficiaries_lag_1",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Unique beneficiaries in year t-1",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "beneficiary_growth_yoy",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Year-over-year beneficiary percentage growth",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "spending_lag_1",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Gross drug spending ($) in year t-1",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "spending_growth_yoy",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Year-over-year gross spending percentage growth",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "avg_spending_per_claim_growth",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Year-over-year unit cost growth rate",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "years_observed_before_t",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Count of historical CMS observation years prior to t",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "claims_rolling_mean_2y",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "2-year rolling average claim volume [t-1, t]",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "claims_rolling_std_2y",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "2-year rolling standard deviation of claims",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "spending_rolling_mean_2y",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "2-year rolling average spending ($)",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "is_first_observation_year",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Flag indicating baseline observation year with no prior lag",
+      "source": "Derived"
+    },
+    {
+      "name": "prior_shortage_count",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Cumulative count of FDA shortage events first posted in years <= t",
+      "source": "FDA Shortage (Derived)"
+    },
+    {
+      "name": "ever_shortage_before_t",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Flag indicating if drug experienced any FDA shortage in years <= t",
+      "source": "FDA Shortage (Derived)"
+    },
+    {
+      "name": "years_since_last_shortage",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Years elapsed since most recent FDA shortage (or -1 if none)",
+      "source": "FDA Shortage (Derived)"
+    },
+    {
+      "name": "is_single_manufacturer",
+      "data_type": "float",
+      "category": "numerical",
+      "required": true,
+      "description": "Flag indicating sole manufacturer reliance (manufacturer_count == 1)",
+      "source": "CMS Part D (Derived)"
+    },
+    {
+      "name": "therapeutic_category",
+      "data_type": "string",
+      "category": "categorical",
+      "required": true,
+      "description": "Primary FDA therapeutic category classification",
+      "source": "FDA Shortage"
+    }
+  ],
+  "usage_notes": "Input records must match this feature schema exactly before passing to model inference."
+}

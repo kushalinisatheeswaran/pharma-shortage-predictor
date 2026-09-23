@@ -1,0 +1,105 @@
+{
+  "model_name": "MedCascade Rare-Event Logistic Regression Classifier",
+  "model_version": "1.0.0",
+  "model_role": "experimental rare-event relative shortage-risk classifier",
+  "training_feature_years": [
+    2018,
+    2019,
+    2020,
+    2021
+  ],
+  "target_years": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "training_observations": 1936,
+  "training_positive_count": 10,
+  "validation_feature_year": 2022,
+  "validation_observations": 484,
+  "validation_positive_count": 13,
+  "feature_names": [
+    "claims",
+    "beneficiaries",
+    "spending",
+    "avg_spending_per_claim",
+    "avg_spending_per_beneficiary",
+    "manufacturer_count",
+    "claims_lag_1",
+    "claims_growth_yoy",
+    "beneficiaries_lag_1",
+    "beneficiary_growth_yoy",
+    "spending_lag_1",
+    "spending_growth_yoy",
+    "avg_spending_per_claim_growth",
+    "years_observed_before_t",
+    "claims_rolling_mean_2y",
+    "claims_rolling_std_2y",
+    "spending_rolling_mean_2y",
+    "is_first_observation_year",
+    "prior_shortage_count",
+    "ever_shortage_before_t",
+    "years_since_last_shortage",
+    "is_single_manufacturer",
+    "therapeutic_category"
+  ],
+  "numerical_features": [
+    "claims",
+    "beneficiaries",
+    "spending",
+    "avg_spending_per_claim",
+    "avg_spending_per_beneficiary",
+    "manufacturer_count",
+    "claims_lag_1",
+    "claims_growth_yoy",
+    "beneficiaries_lag_1",
+    "beneficiary_growth_yoy",
+    "spending_lag_1",
+    "spending_growth_yoy",
+    "avg_spending_per_claim_growth",
+    "years_observed_before_t",
+    "claims_rolling_mean_2y",
+    "claims_rolling_std_2y",
+    "spending_rolling_mean_2y",
+    "is_first_observation_year",
+    "prior_shortage_count",
+    "ever_shortage_before_t",
+    "years_since_last_shortage",
+    "is_single_manufacturer"
+  ],
+  "categorical_features": [
+    "therapeutic_category"
+  ],
+  "classifier_parameters": {
+    "penalty": "l2",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "random_state": 42,
+    "solver": "lbfgs",
+    "max_iter": 1000
+  },
+  "validation_metrics": {
+    "pr_auc": 0.231,
+    "roc_auc": 0.9169,
+    "precision": 0.1628,
+    "recall": 0.5385,
+    "f1": 0.25,
+    "accuracy": 0.9132,
+    "tp": 7,
+    "fp": 36,
+    "fn": 6,
+    "tn": 435,
+    "decision_threshold": 0.5
+  },
+  "calibrated": false,
+  "score_interpretation": "uncalibrated relative shortage-risk score (bounded in [0, 1])",
+  "artifact_creation_info": {
+    "framework": "scikit-learn",
+    "library_versions": {
+      "scikit-learn": "1.6.0",
+      "pandas": "3.0.6",
+      "numpy": "2.5.3"
+    }
+  }
+}

@@ -10,10 +10,15 @@ class Settings:
     PROJECT_VERSION: str = "0.1.0"
     
     # Allowed CORS Origins
-    ALLOWED_ORIGINS: list[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ]
+    @property
+    def ALLOWED_ORIGINS(self) -> list[str]:
+        env_origins = os.getenv("ALLOWED_ORIGINS")
+        if env_origins:
+            return [o.strip() for o in env_origins.split(",") if o.strip()]
+        return [
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+        ]
     
     # Artifact paths
     MODEL_PATH: str = os.getenv("MODEL_PATH", "models/medcascade_logistic_pipeline.joblib")

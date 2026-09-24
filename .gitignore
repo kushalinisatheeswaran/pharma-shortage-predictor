@@ -6,5 +6,10 @@ data/raw/*
 !.gitkeep
 data/processed/*
 !.gitkeep
+!data/processed/drug_graph_nodes.csv
+!data/processed/drug_graph_edges.csv
+!data/processed/ml_feature_candidates.csv
 *.pkl
 *.joblib
+!models/*.joblib
+
